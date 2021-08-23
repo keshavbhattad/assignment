@@ -53,10 +53,10 @@ func read_values() []int{
 	}
 
 	conn.SetReadDeadline(time.Now().Add(10*time.Second))
-	batch := conn.ReadBatch(200, 1e6) // fetch 10KB min, 1MB max
+	batch := conn.ReadBatch(200, 1e6) // fetch 200B min, 1MB max
 	var values string
 	for {
-		b := make([]byte, 200) // 10KB max per message
+		b := make([]byte, 200) // 200B max per message
 		_, err := batch.Read(b)
 		if err != nil {
 			break
